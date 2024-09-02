@@ -2,11 +2,22 @@ import useStyles from "./styles/App.js";
 import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 import Posts from "./components/Posts/Posts.jsx";
 import Form from "./components/Form/Form.jsx";
-
+import { useDispatch } from "react-redux";
 import memories from "./assets/icons/icons8-memories-64.png";
+import { useEffect } from "react";
+import { getPosts } from "./actions/posts.js";
 
 function App() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  let currentId;
+  let setCurrentId;
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
