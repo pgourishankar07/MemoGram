@@ -3,16 +3,13 @@ import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 import Posts from "./components/Posts/Posts.jsx";
 import Form from "./components/Form/Form.jsx";
 import { useDispatch } from "react-redux";
-import memories from "./assets/icons/icons8-memories-64.png";
+import memories from "./assets/icons/icon64.png";
 import { useEffect } from "react";
 import { getPosts } from "./actions/posts.js";
 
 function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  let currentId;
-  let setCurrentId;
 
   useEffect(() => {
     dispatch(getPosts());
@@ -21,10 +18,15 @@ function App() {
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">
-          Memories
+        <Typography className={classes.heading} variant="h3" align="left">
+          <img
+            className={classes.image}
+            src={memories}
+            alt="icon"
+            height="45"
+          />
+          MemoGram
         </Typography>
-        <img className={classes.image} src={memories} alt="icon" height="60" />
       </AppBar>
       <Grow in>
         <Container>
