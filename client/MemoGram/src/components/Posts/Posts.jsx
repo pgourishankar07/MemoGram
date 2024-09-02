@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import Post from "./Post/Post.jsx";
 import useStyles from "./Posts.js";
 
 import { CircularProgress, Grid } from "@mui/material";
 
-const Posts = () => {
+const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts);
   console.log(posts);
@@ -20,7 +21,7 @@ const Posts = () => {
     >
       {posts.map((post) => (
         <Grid key={post._id} item xs={12} sm={6} md={6}>
-          <Post post={post} />
+          <Post post={post} setCurrentId={setCurrentId} />
         </Grid>
       ))}
     </Grid>

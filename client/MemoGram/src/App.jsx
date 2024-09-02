@@ -4,16 +4,17 @@ import Posts from "./components/Posts/Posts.jsx";
 import Form from "./components/Form/Form.jsx";
 import { useDispatch } from "react-redux";
 import memories from "./assets/icons/icon64.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPosts } from "./actions/posts.js";
 
 function App() {
+  const [currentId, setCurrentId] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [dispatch, currentId]);
 
   return (
     <Container maxWidth="lg">
@@ -37,10 +38,10 @@ function App() {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

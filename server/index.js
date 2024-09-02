@@ -10,14 +10,12 @@ dotenv.config();
 
 const app = express();
 
-// Middleware setup
 app.use(bodyParser.json({ limit: "30mb" })); // Limiting request size to mitigate DoS attacks
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Use 'qs' library for parsing objects/arrays
 app.use(cors());
 
 app.use("/posts", postsRouter);
 
-// Example of connecting to MongoDB (make sure to replace 'MONGO_URL' with your actual variable name)
 mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_URL}@cluster0.shn3qtn.mongodb.net/MemoGram?retryWrites=true&w=majority`
