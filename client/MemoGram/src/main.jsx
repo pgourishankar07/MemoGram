@@ -6,7 +6,7 @@ import "./styles/index.css";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
-import reducers from "./reducers";
+import { reducers } from "./reducers";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 

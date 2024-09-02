@@ -3,13 +3,13 @@ import memories from "../../assets/icons/icon64.png";
 import useStyles from "./Navbar.js";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
-  // const location = useLocation();
+  const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
 
@@ -21,17 +21,17 @@ const Navbar = () => {
     setUser(null);
   };
 
-  // useEffect(() => {
-  //   const token = user?.token;
+  useEffect(() => {
+    const token = user?.token;
 
-  //   if (token) {
-  //     const decodedToken = decode(token);
+    if (token) {
+      const decodedToken = jwtDecode(token);
 
-  //     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-  //   }
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
 
-  //   setUser(JSON.parse(localStorage.getItem("profile")));
-  // }, [location]);
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">

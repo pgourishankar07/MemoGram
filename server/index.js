@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import postsRouter from "./routes/posts.js";
+import userRouter from "./routes/user.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Use 'qs' l
 app.use(cors());
 
 app.use("/posts", postsRouter);
+app.use("/user", userRouter);
 
 mongoose
   .connect(

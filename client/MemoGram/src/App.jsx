@@ -13,7 +13,6 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/auth" exact component={Auth} />
         </Switch>
-        <Home />
       </Container>
     </BrowserRouter>
   );

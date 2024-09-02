@@ -17,9 +17,6 @@ const Home = () => {
       <Container>
         <Grid
           container
-          sx={{
-            flexDirection: { xs: "column-reverse", sm: "row" },
-          }}
           justify="space-between"
           alignItems="stretch"
           spacing={3}
