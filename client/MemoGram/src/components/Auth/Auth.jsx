@@ -9,7 +9,7 @@ import {
   Container,
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import Icon from "./Icon";
@@ -57,7 +57,6 @@ const SignUp = () => {
 
     try {
       dispatch({ type: "AUTH", data: { result, token } });
-
       history.push("/");
     } catch (error) {
       console.log(error);
@@ -129,25 +128,27 @@ const SignUp = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          <GoogleLogin
-            clientId="337691363377-g81o8q5f29aat94sd0805pae7p8qr0pm.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleError}
-            cookiePolicy="single_host_origin"
-          />
+          <GoogleOAuthProvider clientId="410563785838-cmoo7eskd0lgfdtc9tq8p6918n3p1b88.apps.googleusercontent.com">
+            <GoogleLogin
+              onSuccess={googleSuccess}
+              onFailure={googleError}
+              // cookiePolicy="single_host_origin"
+              render={(renderProps) => (
+                <Button
+                  className={classes.googleButton}
+                  color="primary"
+                  fullWidth
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  startIcon={<Icon />}
+                  variant="contained"
+                >
+                  Google Sign In
+                </Button>
+              )}
+            />
+          </GoogleOAuthProvider>
+
           <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

@@ -14,6 +14,7 @@ const postsSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  likes: { type: [String], default: [] },
 });
 
 const PostsMessage = mongoose.model("PostsMessage", postsSchema);
