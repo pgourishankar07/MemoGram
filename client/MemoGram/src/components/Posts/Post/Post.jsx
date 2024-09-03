@@ -20,11 +20,17 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user?.result?._id + " " + post._id);
+  console.log(
+    (user?.result?.googleId === post?.creator + " " + user?.result?._id) ===
+      post?.creator
+  );
+  console.log(post);
 
   const Likes = () => {
     if (post.likes.length > 0) {
-      return post.likes.find((like) => like === user?.result?._id) ? (
+      return post.likes.find(
+        (like) => like === user?.result?._id || user?.result?.googleId
+      ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;

@@ -52,7 +52,10 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   const handleFile = (file) => {
-    console.log(file);
+    if (parseInt(file.size, 10) > 2 * 1024) {
+      alert("File size exceeds 2 MB. Please select a smaller file.");
+      return;
+    }
     setPostData({ ...postData, selectedFile: file.base64 });
   };
 

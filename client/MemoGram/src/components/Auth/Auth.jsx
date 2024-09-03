@@ -16,6 +16,7 @@ import Icon from "./Icon";
 import { signin, signup } from "../../actions/auth";
 import useStyles from "./Auth.js";
 import Input from "./Input";
+import { jwtDecode } from "jwt-decode";
 
 const initialState = {
   firstName: "",
@@ -52,8 +53,23 @@ const SignUp = () => {
   };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+    const token = res?.credential;
+    console.log(res);
+    // console.log(res);
+    const decoded = jwtDecode(token);
+    console.log(decoded);
+
+    const userInfo = {
+      name: decoded.name || "User",
+      email: decoded.email,
+      id: decoded.sub,
+      img: decoded.picture,
+    };
+    const result = {
+      name: userInfo.name,
+      googleId: userInfo.id,
+      imageUrl: userInfo.img,
+    };
 
     try {
       dispatch({ type: "AUTH", data: { result, token } });
